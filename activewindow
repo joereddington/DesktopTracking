@@ -1,0 +1,7 @@
+tell application "System Events" to tell (process 1 where frontmost is true)
+    set o to name
+    try
+        set o to o & ":" & name of window 1
+    end try
+    o
+end tell
