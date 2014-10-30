@@ -12,10 +12,13 @@ public class ActivityLogger {
     String workingDirectory = "../output/";
     CurrentWindowLogger nameGrabber = new CurrentWindowLogger(workingDirectory, 1);
     ScreenCapture picGrabber = new ScreenCapture(workingDirectory, 5);
+    CurrentWiFiLogger wifiGrabber = new CurrentWiFiLogger(workingDirectory, 10);
     Thread tn = new Thread(nameGrabber);
     tn.start();
     Thread tp = new Thread(picGrabber);
     tp.start();
+    Thread tw = new Thread(wifiGrabber);
+    tw.start();
   }
 
   public static void waitForNextSampleTime(int minsToWait) {

@@ -18,22 +18,22 @@ public class CurrentWindowLogger implements Runnable {
     minsBetweenScreenshots = i;
   }
 
-  private void log(String response) {
+  protected void log(String response, String filename) {
     try {
-      toFile(workingDirectory + "results", ActivityLogger.getDateTime() + response);
+      toFile(workingDirectory + filename, ActivityLogger.getDateTime() + response);
     } catch (IOException e1) {
       e1.printStackTrace();
     }
   }
 
-  private void toFile(String filename, String text) throws IOException {
+  protected void toFile(String filename, String text) throws IOException {
     FileWriter fstream = new FileWriter(filename + ".txt", true);
     BufferedWriter out = new BufferedWriter(fstream);
     out.write(text);
     out.close();
   }
 
-  private String call(String command) {
+  protected String call(String command) {
     Runtime r = Runtime.getRuntime();
     String returnValue = "";
     try {
@@ -96,7 +96,7 @@ public class CurrentWindowLogger implements Runnable {
   @Override
   public void run() {
     while (true) {
-      log(call("osascript " + workingDirectory + "../activewindow"));
+      log(call("osascript " + workingDirectory + "../activewindow"),"results");
       ActivityLogger.waitForNextSampleTime(minsBetweenScreenshots);
     }
   }
