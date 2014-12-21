@@ -10,6 +10,10 @@ public class ActivityLogger {
   public static void main(String[] args) {
 
     String workingDirectory = "../output/";
+    if (args.length>0){
+      workingDirectory = args[0];
+      System.out.println(workingDirectory+" :) ");
+    }
     CurrentWindowLogger nameGrabber = new CurrentWindowLogger(workingDirectory, 1);
     ScreenCapture picGrabber = new ScreenCapture(workingDirectory, 5);
     CurrentWiFiLogger wifiGrabber = new CurrentWiFiLogger(workingDirectory, 10);
